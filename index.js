@@ -18,16 +18,30 @@ app.get( "/sendMessage", ( req, res ) => [
 // API Route to trigger sending a message
 app.post( "/sendMessage", async ( req, res ) =>
 {
-  const { message, students } = req.body;
+  const { time, students } = req.body;
 
+  let today = new Date();
+  let day = today.getDate();
+  let month = today.getMonth() + 1;
+  let formattedDate = day + "/" + month;
 
   // تحقق إذا كانت البيانات مدخلة بشكل صحيح
-  if ( !students|| !message ) { return res.status( 400 ).send( "chatId and message are required." );}
+  if ( !students ) { return res.status( 400 ).send( "chatId and message are required." );}
   try
   {
     students.forEach( async student =>
     {
-      await sendMessage( `963${student.phoneNumber}@s.whatsapp.net`, message );
+      await sendMessage( `963${student.phoneNumber}@s.whatsapp.net`,  `
+السلام عليكم ورحمة الله وبركاته
+حياكم الله
+🍃🍃🍃🍃🍃🍃🍃
+
+نعلمكم بغياب ولدكم  ${student.name}عن الدورة اليوم  ${ time || formattedDate }. . .
+يرجى أخذ العلم والالتزام بالدوام أكثر ...
+
+
+✨ إدارة جامع الشيخ خيرو ياسين ...
+        ` );
 
     } );
     res.status( 200 ).send( "Message sent successfully." );
