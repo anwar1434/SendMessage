@@ -36,7 +36,7 @@ app.post( "/sendMessage", async ( req, res ) =>
 حياكم الله
 🍃🍃🍃🍃🍃🍃🍃
 
-نعلمكم بغياب ولدكم  ${student.name} عن الدورة اليوم  ${ time || formattedDate }
+نعلمكم بغياب ولدكم   ${student.name} عن الدورة اليوم  ${ time || formattedDate }
 يرجى أخذ العلم والالتزام بالدوام أكثر ...
 
 
